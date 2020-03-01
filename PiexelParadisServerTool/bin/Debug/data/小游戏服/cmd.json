@@ -1,0 +1,80 @@
+[
+    {
+        "type": "timer",
+        "time": 5000,
+        "shift": 10,
+        "cmd": "tell gxh2004 timer!"
+    },
+    {
+        "type": "join",
+        "cmd": "sched 15 %name% \"execute $name$ ~~~ function menu\""
+    },
+    {
+        "type": "form",
+        "text": "服务器功能菜单（输入/c打开）",
+        "title": "服务器菜单",
+        "name": "root",
+        "buttons": [
+            [
+                "跨服传送菜单",
+                "",
+                "execute %name% ~ ~ ~ c transfer"
+            ],
+            [
+                "小游戏服功能菜单",
+                "",
+                "execute %name% ~~~ execute @s[tag=!create] ~ ~ ~ c skyland"
+            ]
+        ]
+    },
+    {
+        "type": "form",
+        "text": "点击一个按钮来传送到对应服务器",
+        "title": "跨服传送菜单",
+        "name": "transfer",
+        "buttons": [
+            [
+                "§a传送至登录服",
+                "say 玩家%name%前往了登录服！",
+                "execute %name% ~~~ transfer 47.103.140.3 19132"
+            ],
+            [
+                "§e传送到生存服",
+                "say 玩家%name%前往了生存服！",
+                "execute %name% ~~~ transfer 47.103.140.3 19130"
+            ],
+            [
+                "§c传送到小游戏服",
+                "say 玩家%name%前往了小游戏服！",
+                "execute %name% ~~~ transfer 122.51.133.206 19130"],
+            [
+                "§b前往海岛服",
+                "say 玩家%name%前往了海岛服！",
+                "execute %name% ~~~ transfer 122.51.133.206 19132"
+            ],
+            [
+                "返回主菜单",
+                "",
+                "execute %name% ~ ~ ~ c root"
+            ]
+        ]
+    },
+    
+    {
+        "type": "form",
+        "text": "快捷功能",
+        "title": "小游戏服功能菜单",
+        "name": "skyland",
+        "buttons": [
+            [
+                "§a加入",
+                "",
+                "execute %name% ~~~ function bw/join"
+            ]
+        ]
+    },
+    {
+        "type": "menuitem",
+        "itemid": 52
+    }
+]

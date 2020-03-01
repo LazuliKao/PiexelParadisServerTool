@@ -1,0 +1,118 @@
+[
+    {
+        "type": "join",
+        "cmd": "sched 15 %name% \"execute $name$ ~~~ function menu\""
+    },
+    {
+        "type": "form",
+        "text": "服务器功能菜单（输入/c打开）",
+        "title": "服务器菜单",
+        "name": "root",
+        "buttons": [
+            [
+                "跨服传送菜单",
+                "execute %name% ~~~ c transfer",
+                "tag %name% add protected"
+            ],
+            [
+                "生存服快捷菜单",
+                "execute %name% ~~~ execute @s[tag=!create] ~ ~ ~ c sur",
+                "tag %name% add protected"
+            ],
+            [
+                "          快速TP§7(/tpa gui)",
+                "execute %name% ~~~ tpa gui",
+                "tag %name% add protected"
+            ],
+            [
+                "             快捷传送§7(/home /warp)",
+                "execute %name% ~~~ c home",
+                "tag %name% add protected"
+            ],
+            [
+                "关闭",
+                "execute %name% ~ ~ ~ function menu",
+                "tag %name% add protected"
+            ]
+        ]
+    },
+    {
+        "type": "form",
+        "text": "点击一个按钮来传送到对应服务器",
+        "title": "跨服传送菜单",
+        "name": "transfer",
+        "buttons": [
+            [
+                "传送至登录服",
+                "say 玩家%name%前往了登录服！",
+                "execute %name% ~~~ transfer 47.103.140.3 19132"
+            ],
+            [
+                "传送到生存服",
+                "say 玩家%name%前往了生存服！",
+                "execute %name% ~~~ transfer 47.103.140.3 19130"
+            ],
+            [
+                "传送到小游戏服",
+                "say 玩家%name%前往了小游戏服！",
+                "execute %name% ~~~ transfer 122.51.133.206 19130"
+            ],
+            [
+                "前往海岛服",
+                "say 玩家%name%前往了海岛服！",
+                "execute %name% ~~~ transfer 122.51.133.206 19132"
+            ],
+            [
+                "返回主菜单",
+                "execute %name% ~ ~ ~ c root",
+                "tag %name% add protected"
+            ]
+        ]
+    },
+    {
+        "type": "form",
+        "text": "快捷功能",
+        "title": "生存服功能菜单",
+        "name": "sur",
+        "buttons": [
+            [
+                "主城",
+                "execute %name% ~~~ warp spa",
+                "tag %name% add protected"
+            ],
+            [
+                "生存区出生地",
+                "execute %name% ~~~ warp sur",
+                "tag %name% add protected"
+            ],
+            [
+                "商店",
+                "execute %name% ~~~ warp shop",
+                "tag %name% add protected"
+            ],
+            [
+                "返回主菜单",
+                "execute %name% ~ ~ ~ c root",
+                "tag %name% add protected"
+            ]
+        ]
+    },
+    {
+    {
+        "type": "form",
+        "text": "§e输入§7/home add <name:str>§e来设置home!\n§e输入§7/home del <name:str>§e来删除home!\n§e输入§7/home go <name:str>§e回home\n§e输入§7/home ls§e列出已设置的home",
+        "title": "服务器公告",
+        "name": "announcement",
+        "buttons": [
+            [
+                "关闭",
+                "",
+                "tag %name% add protected"
+            ]
+        ]
+    },
+    {
+        "type": "menuitem",
+        "itemid": 347
+    }
+]

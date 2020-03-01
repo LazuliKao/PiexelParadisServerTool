@@ -1,0 +1,257 @@
+﻿<Window x:Class="PiexelParadisServerTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PiexelParadisServerTool"
+         xmlns:converters="clr-namespace:Elements.Converters"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        x:Name="MainWin"
+        mc:Ignorable="d"
+        Title="PixelParadisServerTool" Height="400" Width="500"
+        ResizeMode="CanResizeWithGrip"
+          MinHeight="50" MinWidth="30" 
+         Background="{DynamicResource MaterialDesignPaper}" AllowsTransparency="True" WindowStyle="None" FontFamily="Microsoft YaHei">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type ResizeGrip}">
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ResizeGrip}">
+                            <Border Height="15" Width="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="SizeNWSE" >
+                                <materialDesign:PackIcon HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="25" Width="25" Kind="ResizeBottomRight"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MaterialDesignListBoxItem}" >
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="{TemplateBinding Margin}"
+                            ClipToBounds="{TemplateBinding ClipToBounds}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualStateGroup.Transitions>
+                                            <VisualTransition GeneratedDuration="0:0:0.6" To="Normal">
+                                                <VisualTransition.GeneratedEasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </VisualTransition.GeneratedEasingFunction>
+                                            </VisualTransition>
+                                        </VisualStateGroup.Transitions>
+                                        <VisualState Name="Normal"/>
+                                        <VisualState Name="MouseOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="MouseOverBorder" Storyboard.TargetProperty="Opacity"
+                                                             To=".15" Duration="0"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState Name="Disabled"/>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup Name="SelectionStates">
+                                        <VisualStateGroup.Transitions>
+                                            <VisualTransition GeneratedDuration="0:0:0.2"/>
+                                        </VisualStateGroup.Transitions>
+                                        <VisualState Name="Selected">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="SelectedBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To=".17" Duration="0"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState Name="Unselected"/>
+                                        <VisualState Name="SelectedUnfocused">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="SelectedBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To=".15" Duration="0"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid>
+                                    <Border x:Name="MouseOverBorder"
+                                    Opacity="0"
+                                    Background="{TemplateBinding Foreground}"/>
+
+                                    <Border x:Name="SelectedBorder"
+                                    Opacity="0"
+                                    Background="{TemplateBinding Foreground}"
+                                    RenderTransformOrigin="0.5,0.5">
+                                        <Border.RenderTransform>
+                                            <ScaleTransform ScaleX="1"/>
+                                        </Border.RenderTransform>
+                                    </Border>
+                                    <materialDesign:Ripple Feedback="{TemplateBinding Foreground}"
+                                        Focusable="False"
+                                        Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                        ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Padding="{TemplateBinding Padding}"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value=".56" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                    <converters:MainWinRectangle x:Key="MainWinRectangle" />
+                    <converters:Divider_1_2 x:Key="Divider_1_2"/>
+                    <converters:Divider_1_3 x:Key="Divider_1_3"/>
+                    <converters:Divider_2_3 x:Key="Divider_2_3"/>
+                    <converters:DetectSelectedIndex x:Key="DetectSelectedIndex"/>
+                    <converters:MarginToBottom x:Key="MarginToBottom"/>
+                    <converters:MarginToLeft x:Key="MarginToLeft"/>
+                    <converters:MarginToRight x:Key="MarginToRight"/>
+                    <converters:MarginToTop x:Key="MarginToTop"/>
+                    <converters:MaeginToDouble x:Key="MaeginToDouble"/>
+                    <converters:CustomizeBG1 x:Key="customizeBG1"/>
+                    <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+                    <converters:CustomizeEditTextBoxMargin x:Key="CustomizeEditTextBoxMargin"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid>
+            <Rectangle  StrokeThickness="{Binding Margin,ElementName=root,Converter={StaticResource MaeginToDouble}}" Stroke="{Binding IsActive, ElementName=MainWin, Converter={StaticResource MainWinRectangle}}"/>
+            <Grid Margin="2" x:Name="root"   materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                <Grid x:Name="ContentArea" Margin="0,50,0,0" >
+                    <Grid x:Name="TopArea" VerticalAlignment="Top" >
+                        <Rectangle x:Name="widthModel" Margin="10"/>
+                        <ComboBox x:Name="SelectedServer" SelectionChanged="SelectedServer_SelectionChanged" Margin="10" Width="{Binding ActualWidth, Converter={StaticResource Divider_1_3}, ElementName=widthModel, Mode=OneWay}" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="选择服务器" materialDesign:TextFieldAssist.HasClearButton="True"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:TextFieldAssist.SuffixText="Server"  />
+                        <PasswordBox Margin="10" x:Name="pwdBox" Width="{Binding ActualWidth, Converter={StaticResource Divider_2_3}, ElementName=widthModel, Mode=OneWay}" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"   materialDesign:TextFieldAssist.HasClearButton="True"
+                  LostFocus="PwdBox_LostFocus"   VerticalAlignment="Center"   IsEnabled="{Binding SelectedIndex,ElementName=SelectedServer,Mode=OneWay ,Converter={StaticResource DetectSelectedIndex}}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="VpnKey" Height="24" Width="40"/>
+                                    <TextBlock x:Name="pwdCheck" Text="Password" FontSize="18"/>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </PasswordBox>
+                    </Grid>
+                    <Grid  x:Name="operationArea" Margin="{Binding ActualHeight,ElementName=TopArea,Converter={StaticResource MarginToTop}}">
+                        <materialDesign:Card Margin="5"   materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                            <Grid>
+                                <TextBox IsReadOnly ="{Binding IsChecked,ElementName=EditMode,Mode=OneWay,Converter={StaticResource InverseBoolConverter}}" x:Name="EditTextbox" AcceptsReturn="True" Margin="{Binding IsChecked,ElementName=EditMode,Mode=OneWay,Converter={StaticResource CustomizeEditTextBoxMargin}}" VerticalScrollBarVisibility="Auto" materialDesign:HintAssist.Hint="请先选择服务器、查看内容"  />
+                                <Grid x:Name="EditPanel" Visibility="{Binding IsChecked,ElementName=EditMode,Mode=OneWay,Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <ToolBarTray VerticalAlignment="Top" Margin="0,0,90,0">
+                                        <ToolBar Style="{DynamicResource MaterialDesignToolBar}"  ClipToBounds="False">
+                                            <Button ToolTip="Save" Click="SaveButton_Click">
+                                                <materialDesign:PackIcon   Kind="ContentSave" />
+                                            </Button>
+                                            <Button ToolTip="reload server plugin(/reload_cmd)" Click="ReloadCMD_Button_Click">
+                                                <materialDesign:PackIcon Kind="ProgressCheck" />
+                                                <!--<materialDesign:PackIcon Kind="ProgressAlert" />-->
+                                            </Button>
+                                            <Separator />
+                                            <Button  Command="Cut" ToolTip="Cut" ToolBar.OverflowMode="AsNeeded">
+                                                <materialDesign:PackIcon  Kind="ContentCut" />
+                                            </Button>
+                                            <Button   Command="Copy"   ToolTip="Copy that stuff" ToolBar.OverflowMode="AsNeeded">
+                                                <materialDesign:PackIcon    Kind="ContentCopy" />
+                                            </Button>
+                                            <Button  Command="Paste"   ToolTip="Paste some stuff"  ToolBar.OverflowMode="AsNeeded">
+                                                <materialDesign:PackIcon   Kind="ContentPaste" />
+                                            </Button>
+                                        </ToolBar>
+                                    </ToolBarTray>
+                                    <!--<TextBox x:Name="EditTextbox" VerticalScrollBarVisibility="Auto" AcceptsReturn="True"  Text="{Binding Text,ElementName=outputTextbox}" Margin="5 ,55,5,5"/>-->
+                                </Grid>
+                                <StackPanel Background="{Binding IsChecked,ElementName=EditMode,Mode=OneWay,Converter={StaticResource customizeBG1}}" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Height="55" >
+
+                                    <TextBlock Text="编辑模式" Opacity="0.5" FontSize="15" VerticalAlignment="Center"/>
+                                    <ToggleButton x:Name="EditMode" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="编辑模式"  >
+                                        <materialDesign:PackIcon Kind="Edit"  >
+                                        </materialDesign:PackIcon>
+                                        <materialDesign:ToggleButtonAssist.OnContent>
+                                            <materialDesign:PackIcon   Kind="Edit"  RenderTransformOrigin=".5,.5">
+                                                <materialDesign:PackIcon.RenderTransform>
+                                                    <RotateTransform  Angle="-45" />
+                                                </materialDesign:PackIcon.RenderTransform>
+                                            </materialDesign:PackIcon>
+                                        </materialDesign:ToggleButtonAssist.OnContent>
+                                    </ToggleButton>
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+                    </Grid>
+                </Grid>
+                <Grid>
+                    <materialDesign:DrawerHost  x:Name="drawerHost" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" IsTopDrawerOpen="{Binding ElementName=SettingToggleButton, Path=IsChecked}" TopDrawerBackground="{x:Null}">
+                        <Grid >
+                            <materialDesign:ColorZone x:Name="titleBar" Mode="PrimaryDark" Height="50" Padding="2">
+                                <Grid >
+                                    <Grid>
+                                        <ToggleButton x:Name="MenuToggleButton"  Margin="10,0,0,0" HorizontalAlignment="Left"  Style="{DynamicResource MaterialDesignHamburgerToggleButton}"  Cursor="Hand"/>
+                                        <Grid Margin="50,0,100,0" MouseLeftButtonDown="Move_window_MouseLeftButtonDown" Background="{Binding Background, ElementName=titleBar}">
+                                            <TextBlock Text="{Binding Title,ElementName=MainWin}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        </Grid>
+                                    </Grid>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <ToggleButton Height="50" Width="50" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="WindowSize" Padding="0" Click="ToggleButton_Click">
+                                            <materialDesign:PackIcon Kind="ArrowExpandAll" Width="40" Height="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource Self}}" Foreground="White" />
+                                        </ToggleButton>
+                                        <Button Height="50" Width="50"  Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Close" Padding="0" Click="Close_Button_Click">
+                                            <materialDesign:PackIcon Kind="CloseBoxOutline" Width="40" Height="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource Self}}" Foreground="White" />
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </materialDesign:ColorZone>
+                        </Grid>
+                        <materialDesign:DrawerHost.LeftDrawerContent>
+                            <Grid>
+                                <StackPanel Margin="16,0">
+                                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" DockPanel.Dock="Top" HorizontalAlignment="Right" IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Cursor="{Binding Cursor, ElementName=MenuToggleButton}" />
+                                    <TextBlock Margin="4" HorizontalAlignment="Center" Text="Menu" />
+                                    <Separator/>
+                                    <ListBox SelectionChanged="OperationSelection_SelectionChanged" x:Name="operationSelection" SelectedIndex="0">
+                                        <ListBoxItem Content="player.log"/>
+                                        <ListBoxItem Content="screenlog.0"/>
+                                        <ListBoxItem Content="Announcement"/>
+                                        <ListBoxItem Content="Command"/>
+                                    </ListBox>
+                                    <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Margin="4" HorizontalAlignment="Center" Style="{DynamicResource MaterialDesignFlatButton}" Content="Close" />
+                                </StackPanel>
+                                <materialDesign:MaterialDateDisplay VerticalAlignment="Bottom" Margin="5,5,10,0" Opacity="0.5"/>
+                            </Grid>
+                        </materialDesign:DrawerHost.LeftDrawerContent>
+                    </materialDesign:DrawerHost>
+                </Grid>
+                <materialDesign:DialogHost x:Name="LoadingDialog">
+                    <materialDesign:DialogHost.DialogContent>
+                        <StackPanel Margin="22"  >
+                            <Grid HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Width="25" Height="25" Kind="CheckBold"    Visibility="{Binding IsOpen,ElementName=LoadingDialog,Converter={StaticResource InverseBoolToVisConverter}}" Foreground="{StaticResource SecondaryAccentBrush}"/>
+                                <ProgressBar  Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True"  Visibility="{Binding IsOpen,ElementName=LoadingDialog,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            </Grid>
+                            <TextBlock x:Name="LoadingTip" Text="Loading" TextAlignment="Center"/>
+                        </StackPanel>
+                    </materialDesign:DialogHost.DialogContent>
+                </materialDesign:DialogHost>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

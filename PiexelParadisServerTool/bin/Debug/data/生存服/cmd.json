@@ -1,0 +1,150 @@
+[
+  {
+    "type": "join",
+    "cmd": "sched 15 %name% \"execute $name$ ~~~ function menu\""
+  },
+  {
+    "type": "form",
+    "text": "服务器功能菜单（输入/c打开）",
+    "title": "服务器菜单",
+    "name": "root",
+    "buttons": [
+      [
+        "服务器公告",
+        "execute %name% ~~~ c announcement",
+        "tag %name% add protected"
+      ],
+      [
+        "跨服传送菜单",
+        "execute %name% ~~~ c transfer",
+        "tag %name% add protected"
+      ],
+      [
+        "          快速TP§7(/tpa gui)",
+        "execute %name% ~~~ tpa gui",
+        "tag %name% add protected"
+      ],
+      [
+        "             快捷传送§7(/home /warp)",
+        "execute %name% ~~~ c fasttp",
+        "tag %name% add protected"
+      ],
+      [
+        "关闭",
+        "execute %name% ~ ~ ~ function menu",
+        "tag %name% add protected"
+      ]
+    ]
+  },
+  {
+    "type": "form",
+    "text": "点击一个按钮来传送到对应服务器",
+    "title": "跨服传送菜单",
+    "name": "transfer",
+    "buttons": [
+      [
+        "传送至登录服",
+        "say 玩家%name%前往了登录服！",
+        "execute %name% ~~~ transfer 47.103.140.3 19132"
+      ],
+      [
+        "传送到生存服",
+        "say 玩家%name%前往了生存服！",
+        "execute %name% ~~~ transfer 47.103.140.3 19130"
+      ],
+      [
+        "传送到小游戏服",
+        "say 玩家%name%前往了小游戏服！",
+        "execute %name% ~~~ transfer 122.51.133.206 19130"
+      ],
+      [
+        "前往海岛服",
+        "say 玩家%name%前往了海岛服！",
+        "execute %name% ~~~ transfer 122.51.133.206 19132"
+      ],
+      [
+        "返回主菜单",
+        "execute %name% ~ ~ ~ c root",
+        "tag %name% add protected"
+      ]
+    ]
+  },
+  {
+    "type": "form",
+    "text": "快捷功能",
+    "title": "生存服传送菜单",
+    "name": "sur",
+    "buttons": [
+      [
+        "主城",
+        "execute %name% ~~~ warp spa",
+        "tag %name% add protected"
+      ],
+      [
+        "生存区出生地",
+        "execute %name% ~~~ warp sur",
+        "tag %name% add protected"
+      ],
+      [
+        "商店",
+        "execute %name% ~~~ warp shop",
+        "tag %name% add protected"
+      ],
+      [
+        "返回传送菜单",
+        "execute %name% ~ ~ ~ c fasttp",
+        "tag %name% add protected"
+      ]
+    ]
+  },
+  {
+    "type": "form",
+    "text": "§e选择功能\n",
+    "title": "快捷传送菜单",
+    "name": "fasttp",
+    "buttons": [
+      [
+        "生存服快捷传送",
+        "execute %name% ~~~ execute @s ~~~ c sur",
+        "tag %name% add protected"
+      ],
+      [
+        "home菜单",
+        "execute %name% ~~~ execute @s ~~~ home gui",
+        "tag %name% add protected"
+      ],
+      [
+        "warp菜单",
+        "execute %name% ~~~ execute @s ~~~ warp gui",
+        "tag %name% add protected"
+      ],
+      [
+        "返回上次死亡地点",
+        "execute %name% ~~~ back",
+        "tag %name% add protected"
+      ],
+      [
+        "返回主菜单",
+        "execute %name% ~ ~ ~ c root",
+        "tag %name% add protected"
+      ]
+    ]
+  },
+  {
+    "type": "form",
+    "text": "§7欢迎来到像素彼岸生存服务器\n§a§l【最新通知】§r\n2020/02/11 20:30 插件更新，大部分提示改成中文\n2020/02/10 21:00 启用新的服务器主机\n2020/02/07 17:11 主城烧毁部分修复\n\n\n§a§l【游戏须知】§r\n1.禁止使用非触发式高频\n2.砍树时清把树叶砍干净\n3.挖土时要规律的形状比如正方形,长方形\n4.遇到有坑自觉填上\n5.服务器启动自动清理掉落物品,遗失了掉落物品的,请上主城出生点二楼认领\n6.遇到违规以及熊孩子及时举报\n\n\n§a§l【插件使用】§r\n\n§b#home插件食用方法\n§c§l┣§r§e输入§7/home add <name:str>§e来设置home!\n§c§l┣§r§e输入§7/home del <name:str>§e来删除home!\n§c§l┣§r§e输入§7/home go <name:str>§e回home\n§c§l┣§r§e输入§7/home ls§e列出已设置的home\n§c§l┗§r§e输入§7/home gui§e打开GUI界面一键回家\n\n§b#warp插件食用方法\n§c§l┣[OP]§r§e输入§7/warp add <name:str>§e来设置warp!\n§c§l┣[OP]§r§e输入§7/warp del <name:str>§e来删除warp!\n§c§l┣§r§e输入§7/warp <name:str>§e前往warp\n§c§l┣§r§e输入§7/warp ls§e列出所有warp\n§c§l┗§r§e输入§7/warp gui§e打开所有传送点GUI界面\n\n§b#tpa插件食用方法\n§c§l┣§r§e输入§7/tpa t <玩家名>§e发送传送请求!\n§c§l┣§r§e输入§7/tpa f <玩家名>§e发送传送邀请!\n§c§l┣§r§e输入§7/warp cancel§e销毁已发出的请求\n§c§l┣§r§e输入§7/warp ac§e接受传送请求\n§c§l┣§r§e输入§7/warp de§e拒绝传送请求\n§c§l┗§r§e输入§7/warp gui§e打开快捷传送GUI界面",
+    "title": "服务器公告",
+    "name": "announcement",
+    "buttons": [
+      [
+        "我知道啦！",
+        "",
+        "tag %name% add protected"
+      ]
+    ]
+  },
+  {
+    "type": "menuitem",
+    "itemid": 347
+  }
+]
